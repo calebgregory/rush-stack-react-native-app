@@ -5,13 +5,23 @@
  * @format
  */
 
-module.exports = {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
+ const {
+  applyConfigForLinkedDependencies,
+} = require('@carimus/metro-symlinked-deps')
+
+module.exports = applyConfigForLinkedDependencies(
+  {
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: true,
+        },
+      }),
+    },
   },
-};
+  {
+    projectRoot: __dirname,
+    blacklistLinkedModules: ['react-native'],
+  }
+)

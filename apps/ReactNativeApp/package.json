@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "build": "react-scripts build"
   },
   "dependencies": {
     "react": "17.0.1",
@@ -16,6 +17,10 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
+    "@carimus/metro-symlinked-deps": "1.1.0",
+    "@react-native-community/cli": "^5.0.1-alpha.0",
+    "@react-native-community/cli-platform-android": "^5.0.1-alpha.0",
+    "@react-native-community/cli-platform-ios": "^5.0.1-alpha.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.20",
     "@types/react-native": "^0.64.0",
