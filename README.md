@@ -1,0 +1,2 @@
+- https://github.com/microsoft/rushstack/issues/1025
+- https://github.com/vjpr/pnpm-react-native-example
