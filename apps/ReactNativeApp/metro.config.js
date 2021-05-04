@@ -5,23 +5,43 @@
  * @format
  */
 
- const {
-  applyConfigForLinkedDependencies,
-} = require('@carimus/metro-symlinked-deps')
+const path = require('path')
+const { applyConfigForLinkedDependencies } = require('@carimus/metro-symlinked-deps')
+const rush = require('@microsoft/rush-lib')
 
-module.exports = applyConfigForLinkedDependencies(
-  {
-    transformer: {
-      getTransformOptions: async () => ({
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: true,
-        },
-      }),
+function getConfig(appDir) {
+  const rushConf = rush.RushConfiguration.loadFromDefaultLocation({
+    startingFolder: process.cwd(),
+  })
+
+  const node_modules = path.resolve(rushConf.commonFolder, './temp/node_modules/.pnpm')
+  const workspaceDirs = rushConf.projects
+    .map(project => path.resolve(rushConf.rushJsonFolder, project.projectRelativeFolder))
+    .filter(dir => dir !== appDir)
+
+  const watchFolders = [
+    node_modules,
+    ...workspaceDirs
+  ]
+  console.log('watchFolders:', watchFolders)
+
+  return applyConfigForLinkedDependencies(
+    {
+      transformer: {
+        getTransformOptions: async () => ({
+          transform: {
+            experimentalImportSupport: false,
+            inlineRequires: true,
+          },
+        }),
+      },
     },
-  },
-  {
-    projectRoot: __dirname,
-    blacklistLinkedModules: ['react-native'],
-  }
-)
+    {
+      projectRoot: appDir,
+      blacklistLinkedModules: ['react-native'],
+      additionalWatchFolders: watchFolders,
+    }
+  )
+}
+
+module.exports = getConfig(__dirname)
