@@ -27,6 +27,8 @@
    ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
 
+ import { sum } from '@calebgregory/math'
+
  const Section: React.FC<{
    title: string;
  }> = ({children, title}) => {
@@ -40,7 +42,7 @@
              color: isDarkMode ? Colors.white : Colors.black,
            },
          ]}>
-         {title}
+         {title + sum(3, 4)}
        </Text>
        <Text
          style={[

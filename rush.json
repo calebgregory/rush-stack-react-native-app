@@ -458,8 +458,14 @@
     //   "reviewCategory": "tools"
     // }
     {
+      "packageName": "@calebgregory/math",
+      "projectFolder": "libraries/math",
+      "publishFolder": "temp/publish"
+    },
+    {
       "packageName": "reactnativeapp",
-      "projectFolder": "apps/ReactNativeApp"
+      "projectFolder": "apps/ReactNativeApp",
+      "publishFolder": "temp/publish"
     }
   ]
 }
